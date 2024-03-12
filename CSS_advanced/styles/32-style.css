@@ -361,7 +361,6 @@ ul.row {
     width: 100%;
     object-fit: cover;
     vertical-align: bottom;
-    transition: var(--transition-duration) var(--transition-cubic-bezier);
 }
 
 .card-work .card-inner {
@@ -406,6 +405,7 @@ ul.row {
 
 .card-work:hover .card-image img {
     transform: scale(1.2);
+    transition: var(--transition-duration) var(--transition-cubic-bezier);
 }
 
 .card-work:hover .card-outer {
