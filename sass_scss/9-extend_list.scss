@@ -4,14 +4,16 @@ $font-sizes: 12px;
 $success-color: #00FF00;
 $warning-color: #FF0000;
 
-.info, .success, .warning {
+.info {
   font-size: $font-sizes;
 }
 
 .success {
+  @extend .info;
   color: $success-color;
 }
 
 .warning {
+  @extend .info;
   color: $warning-color;
 }
