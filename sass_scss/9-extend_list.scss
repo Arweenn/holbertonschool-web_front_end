@@ -1,19 +1,15 @@
 /* Assign font sizes and text colors */
 
-$font-sizes: 12px;
-$success-color: #00FF00;
-$warning-color: #FF0000;
-
 .info {
-  font-size: $font-sizes;
+  font-size: 12px;
 }
 
 .success {
   @extend .info;
-  color: $success-color;
+  color: #00FF00;
 }
 
 .warning {
   @extend .info;
-  color: $warning-color;
+  color: #FF0000;
 }
