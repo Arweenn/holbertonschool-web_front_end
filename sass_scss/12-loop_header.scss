@@ -1,0 +1,7 @@
+/* Create tags where '*' is the font-size */
+
+@for $i from 1 through 5 {
+  h#{$i} {
+    font-size: $i * 1px;
+  }
+}

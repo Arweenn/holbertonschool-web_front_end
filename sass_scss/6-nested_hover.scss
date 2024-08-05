@@ -1,0 +1,11 @@
+/* Assign text colors to button tags */
+
+$primary-color: #FF0000;
+$hover-color: #00FF00;
+
+button {
+  color: $primary-color;
+  &:hover {
+    color: $hover-color;
+  }
+}

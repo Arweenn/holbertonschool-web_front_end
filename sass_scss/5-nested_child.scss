@@ -1,0 +1,11 @@
+/* Assign text colors to tags body and class .red */
+
+$primary-color: #3D3D3D;
+$red: #FF0000;
+
+body {
+  color: $primary-color;
+  > .red {
+    color: $red;
+  }
+}

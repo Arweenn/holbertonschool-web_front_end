@@ -1,0 +1,14 @@
+/* Assign poprieties to tags body and p */
+
+$margin-body: 0px;
+$margin-p: 10px;
+$padding-body: 0px;
+
+body {
+  margin: $margin-body;
+  padding: $padding-body;
+  
+  p {
+    margin: $margin-p;
+  }
+}

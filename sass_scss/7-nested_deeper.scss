@@ -1,0 +1,15 @@
+/* Assign font sizes to body, h1 tags */
+
+$font-size-small: 12px;
+$font-size-body: 14px;
+$font-size-h1: 16px;
+
+body {
+  font-size: $font-size-body;
+  h1 {
+    font-size: $font-size-h1;
+  }
+  h1.smaller {
+    font-size: $font-size-small;
+  }
+}

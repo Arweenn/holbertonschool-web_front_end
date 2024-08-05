@@ -1,0 +1,17 @@
+/* Assign colors to tags body, p and h2 */
+
+$primary-color: #3D3D3D;
+$background-color: #6D6D6D;
+
+body {
+  color: $primary-color;
+  background-color: $background-color;
+}
+
+p {
+  color: $primary-color;
+}
+
+h2 {
+  background-color: $background-color;
+}
