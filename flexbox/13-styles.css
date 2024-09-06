@@ -601,7 +601,7 @@
   }
 
   .post-meta-list [class*='post-meta'] {
-    border: none;
+    border: 0;
     margin-bottom: 3rem;
   }
 
