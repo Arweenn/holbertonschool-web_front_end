@@ -1036,7 +1036,7 @@ textarea:valid:not(:placeholder-shown) {
 
 .form-search input[type="search"] {
     display: inline-block;
-    color: var();
+    color: var(--color-white);
     padding-right: 2rem;
     height: 3rem;
     border: 0;
