@@ -363,6 +363,11 @@ a:active {
     white-space: nowrap;
 }
 
+img {
+    width: 100%;
+    height: auto;
+}
+
 /*** 2. LAYOUT ***/
 
 /* Layout
@@ -397,6 +402,27 @@ ul.row {
 
 .col-1-2 {
     width: calc((100% / 2) - 2rem);
+}
+
+@media (max-width: 767px) {
+	:root {
+		--section-padding: 5rem 1.5rem;
+		--section-body-padding: 2rem 0 0;
+	}
+
+	ul.row, .row {
+		flex-direction: column;
+		margin: 0;
+	}
+
+	[class^='col-'] {
+		margin: 0 0 3rem 0;
+	}
+
+	.col-1-3,
+	.col-1-2 {
+		width: 100%;
+	}
 }
 
 /* Navbar
@@ -446,6 +472,12 @@ ul.row {
 .nav .nav-item:hover .nav-link::before {
     background-color: var(--color-primary);
     width: 100%;
+}
+
+@media (max-width: 767px) {
+    .navbar-menu {
+        display: none;
+    }
 }
 
 /* Header
