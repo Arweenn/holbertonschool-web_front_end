@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script src="bundle.js"></script>
+
+	<div id="loginForm">
+		<h2>Login to the website</h2>
+		<input type="text" id="firstname" placeholder="Firstname">
+		<input type="email" id="email" placeholder="Email">
+		<button type="button" onclick="setCookies(); showWelcomeMessageOrForm();">Log me in</button>
+	</div>
+	<div id="welcomeMessage" style="display: none;">
+		<h1 id="welcomeText"></h1>
+	</div>
+
+	<script>
+		function showForm() {
+			const welcomeMessage = document.getElementById('welcomeMessage');
+			if (welcomeMessage) welcomeMessage.style.display = 'none';
+
+			const loginForm = document.getElementById("loginForm");
+			loginForm.style.display = "block";
+		}
+
+		function hideForm() {
+			const loginForm = document.getElementById("loginForm");
+			loginForm.style.display = 'none';
+		}
+
+		function deleteCookiesAndShowForm() {
+			document.cookie = 'firstname=; path=/';
+			document.cookie = 'email=; path=/';
+			showForm();
+		}
+
+		function showWelcomeMessageOrForm() {
+			const firstname = getCookies('firstname');
+			if (firstname) {
+				const welcomeMessage = document.getElementById('welcomeMessage');
+				const welcomeText = document.getElementById('welcomeText');
+				welcomeMessage.style.display = 'block';
+				welcomeText.innerHTML = `Welcome ${firstname} <a href='#' onClick='deleteCookiesAndShowForm()' style='font-weight: normal; font-style: italic; font-size: 10px; margin-left: 10px;'>logout</a>`;
+				hideForm();
+			} else {
+				showForm();
+			}
+		}
+
+		function setCookies() {
+			const firstname = document.getElementById("firstname").value;
+			const email = document.getElementById("email").value;
+			const date = new Date();
+			const expirationDate = new Date(
+				date.getTime() + 1000 * 60 * 60 * 24 * 10
+			).toUTCString();
+
+			document.cookie = `firstname=${firstname}; expires=${expirationDate}; path=/`;
+			document.cookie = `email=${email}; expires=${expirationDate}; path=/`;
+		}
+
+		function getCookies(name) {
+			const cookies = document.cookie.split(";");
+			for (let i = 0; i < cookies.length; i++) {
+				const [cookieName, cookieValue] = cookies[i].split("=").map(c => c.trim());
+				if (cookieName === name) {
+					return cookieValue;
+				}
+			}
+			return "";
+		}
+		window.onload = showWelcomeMessageOrForm;
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+</head>
+
+<body>
+	<script src="bundle.js"></script>
+
+	<div id="loginForm">
+		<h2>Login to the website</h2>
+		<input type="text" id="firstname" placeholder="Firstname">
+		<input type="email" id="email" placeholder="Email">
+		<button type="button" onclick="setCookies(); showWelcomeMessageOrForm();">Log me in</button>
+	</div>
+	<div id="welcomeMessage" style="display: none;">
+		<h1 id="welcomeText"></h1>
+	</div>
+
+	<script>
+		function showForm() {
+			const welcomeMessage = document.getElementById('welcomeMessage');
+			if (welcomeMessage) welcomeMessage.style.display = 'none';
+
+			const loginForm = document.getElementById("loginForm");
+			loginForm.style.display = "block";
+		}
+
+		function hideForm() {
+			const loginForm = document.getElementById("loginForm");
+			loginForm.style.display = 'none';
+		}
+
+		function deleteCookiesAndShowForm() {
+			Cookies.remove('firstname');
+			Cookies.remove('email');
+			showForm();
+		}
+
+		function showWelcomeMessageOrForm() {
+			const firstname = Cookies.get('firstname');
+			if (firstname) {
+				const welcomeMessage = document.getElementById('welcomeMessage');
+				const welcomeText = document.getElementById('welcomeText');
+				welcomeMessage.style.display = 'block';
+				welcomeText.innerHTML = `Welcome ${firstname} <a href='#' onClick='deleteCookiesAndShowForm()' style='font-weight: normal; font-style: italic; font-size: 10px; margin-left: 10px;'>logout</a>`;
+				hideForm();
+			} else {
+				showForm();
+			}
+		}
+
+		function setCookiesAndShowWelcomeMessage() {
+			const firstname = document.getElementById('firstname');
+			const email = document.getElementById('email');
+
+			Cookies.set('firstname', firstname, { expires: 10, path: '/' });
+			Cookies.set('email', email, { expires: 10, path: '/' });
+
+			showWelcomeMessageOrForm();
+		}
+
+
+		window.onload = showWelcomeMessageOrForm;
+	</script>
+</body>
+
+</html>

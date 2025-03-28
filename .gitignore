@@ -1,7 +1,9 @@
 sass_scss/.sass-cache/*
 sass_scss/10-colors.scss
 sass_scss/11-photos.scss
-Cookies_local_storage/*
+Cookies_local_storage/node_modules/*
+Cookies_local_storage/package-lock.json
+Cookies_local_storage/webpack.config.js
 JQuery_advanced/node_modules/*
 JQuery_advanced/package-lock.json
 JQuery_advanced/package.json
