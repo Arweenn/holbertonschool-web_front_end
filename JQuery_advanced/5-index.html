@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+		crossorigin="anonymous" type="application/javascript"></script>
+	</script>
+	<style>
+		.delete_cell {
+			background-color: orange;
+			cursor: pointer;
+		}
+	</style>
+
+	<meta charset="utf-8" />
+	<title>Task 0</title>
+
+</head>
+
+<body>
+	<script>
+		function createFamilyTree() {
+			const t_row = $('<tr></tr>');
+			const table = $('<table></table>');
+			const t_header = $("<thead></thead>");
+			const t_body = $("<tbody></tbody>");
+
+			t_row.append(
+				$("<th></th>").text('Firstname'),
+				$("<th></th>").text("Lastname")
+			);
+			t_header.append(t_row);
+
+			table.append(t_header, t_body);
+			$('body').append(table);
+		};
+
+		function addNewMember(firstName, lastName) {
+			const row = $('<tr></tr>')
+			const firstNameCell = $("<td></<td>").text(firstName);
+			const lastNameCell = $("<td></td>").text(lastName);
+			const deleteCell = $('<td></td>').text('(x)').addClass('delete_cell');
+
+			deleteCell.click(function () {
+				$(this).closest('tr').remove();
+			});
+			row.append(firstNameCell, lastNameCell, deleteCell);
+			$('table tbody').append(row);
+		}
+		createFamilyTree();
+		addNewMember('Guillaume', 'Salva');
+		addNewMember('Arielle', 'Snitz');
+		addNewMember('Fanette', 'Snitz');
+		addNewMember('Gerard', 'Snizt');
+		addNewMember('Victor', 'Salva');
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<meta charset="utf-8" />
+	<title>Task 0</title>
+	<style>
+		#pagination {
+			list-style: none;
+			display: flex;
+		}
+
+		#pagination li {
+			cursor: pointer;
+			margin-left: 10px;
+		}
+
+		#pagination li.active {
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		const form = $('<form></form>');
+		const list_u = $('<ul></ul>');
+		const pagination = $('<ul></ul>').attr({ id: "pagination" });
+
+		function createSearchForm() {
+			const text_input = $('<input>').attr({ type: 'text', placeholder: 'Search Wikipedia', id: 'query' });
+			const submit_input = $('<input>').attr({ type: 'submit', value: 'Submit' });
+
+			form.append(text_input, submit_input);
+			$('body').append(form, list_u, pagination);
+
+			form.submit(function (e) {
+				e.preventDefault();
+				const query = text_input.val();
+				queryWikipedia(query);
+			});
+		}
+
+		function addNewArticle(id, title, snippet) {
+			const list_li = $('<li></li>');
+			const paragraph_1 = $('<p></p>').append(
+				$('<span></span>').text(`${id} - `),
+				$('<b></b>').text(title),
+			);
+			const paragraph_2 = $('<p></p>').html(snippet);
+			list_li.append(paragraph_1, paragraph_2);
+			list_u.append(list_li);
+		}
+
+		function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
+			pagination.empty();
+
+			const totalPages = Math.ceil(numberOfItems / itemsPerPage);
+
+			for (let i = 0; i < totalPages; i++) {
+				const pageItem = $('<li></li>')
+					.text(i + 1)
+					.toggleClass('active', currentOffset === i * itemsPerPage)
+
+				pageItem.click(function () {
+					const query = $('#query').val();
+					queryWikipedia(query, i * itemsPerPage);
+				});
+
+				pagination.append(pageItem);
+			}
+		}
+
+		function queryWikipedia(search, offset = 0) {
+			const url = "https://en.wikipedia.org/w/api.php";
+
+			const data = {
+				action: "query",
+				list: "search",
+				srsearch: search,
+				sroffset: offset,
+				format: "json",
+				origin: '*',
+			};
+
+			$.ajax({
+				url: url,
+				method: 'GET',
+				data: data,
+				success: function (response) {
+					list_u.empty();
+
+					const results = response.query.search || [];
+					results.forEach(result => {
+						addNewArticle(result.pageid, result.title, result.snippet);
+					});
+
+					const totalHits = response.query.searchinfo.totalhits || 0;
+					buildPagination(totalHits, 10, offset);
+				},
+				error: function (error) {
+					console.error('Error querying Wikipedia:', error);
+				}
+			});
+		}
+
+		createSearchForm();
+	</script>
+</body>
+
+</html>
